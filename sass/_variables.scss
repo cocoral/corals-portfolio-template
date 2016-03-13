@@ -1,0 +1,53 @@
+/*
+====================================
+Variables
+====================================
+*/
+
+// color: 
+
+$aqua: #8AEAE8;
+$punch: #D93E82;
+$almostblack:#312928;
+$canary:#F9B81F;
+$grey:#E7E4DF;
+$silver:#F8F7F4;
+
+//fonts
+$righteous:'Righteous', cursive;
+$avenir:'Avenir Light',sans-serif;
+
+.posr{
+	position: relative;
+}
+.posa{
+	position: absolute;
+}
+
+@font-face {
+font-family: 'Avenir Light';
+font-style: normal;
+font-weight: 200;
+src: url('sass/AvenirLTStd-Light.woff') format('woff');
+}
+
+@font-face {
+font-family: 'Avenir Regular';
+font-style: normal;
+font-weight: 400;
+src: url('sass/AvenirLTStd-Medium.woff') format('woff');
+}
+
+@font-face {
+font-family: 'Avenir Regularv Oblique';
+font-style: oblique;
+font-weight: 400;
+src: url('sass/AvenirLTStd-MediumOblique.woff') format('woff');
+}
+
+@font-face {
+font-family: 'Avenir Black';
+font-style: normal;
+font-weight: 600;
+src: url('sass/AvenirLTStd-Black.woff') format('woff');
+}

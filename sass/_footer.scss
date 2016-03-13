@@ -1,3 +1,12 @@
-footer {
+footer{
+	padding: 10px;
 	clear: both;
+	background:$almostblack;
+	color:$silver;
+	.site-info{
+		float: left;
+	}
+	.footer-credit{
+		float: right;
+	}
 }

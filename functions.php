@@ -116,9 +116,20 @@ add_action( 'widgets_init', 'mywptemplate_widgets_init' );
 function mywptemplate_scripts() {
 	wp_enqueue_style( 'mywptemplate-style', get_stylesheet_uri() );
 
+	wp_deregister_script('jquery');
+	  wp_enqueue_script(
+	  	'jquery',
+	  	"http" . ($_SERVER['SERVER_PORT'] == 443 ? "s" : "") . "://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js",
+	  	false, //dependencies
+	  	null, //version number
+	  	true //load in footer
+	  );
+
 	wp_enqueue_script( 'mywptemplate-navigation', get_template_directory_uri() . '/js/navigation.js', array(), '20151215', true );
 
 	wp_enqueue_script( 'mywptemplate-skip-link-focus-fix', get_template_directory_uri() . '/js/skip-link-focus-fix.js', array(), '20151215', true );
+
+	wp_enqueue_script( 'scripts', get_template_directory_uri() . '/js/main.min.js', array('jquery'), '20151215', true );
 
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );
@@ -150,3 +161,12 @@ require get_template_directory() . '/inc/customizer.php';
  * Load Jetpack compatibility file.
  */
 require get_template_directory() . '/inc/jetpack.php';
+
+
+
+/* hackeryou_get_thumbnail_url: Return current post thumbnail url*/
+function hackeryou_get_thumbnail_url($post) {
+    $imageID = get_post_thumbnail_id($post->ID); 
+    $imageURL = wp_get_attachment_url($imageID);
+    return $imageURL;
+}

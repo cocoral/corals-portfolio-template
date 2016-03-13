@@ -1,0 +1,33 @@
+nav{
+	z-index: 3;
+	position:fixed;
+	right:20px;
+	top: 50%;
+    transform: translateY(-50%);
+    text-align: right;
+    li{
+    	padding: 15px 0;
+    }
+    a{
+    	position: relative;
+		padding: 15px;
+    	&:hover p,
+    	&:focus p{
+    		right:20px;
+    		opacity:1;
+    	}
+	    i.fa{
+	    	transform:rotate(45deg);
+	    	font-size:2rem;
+	    }
+	    p{	
+	    	padding-top: 10px;
+	    	transition: all .3s;
+	    	opacity: 0;
+	    	position: absolute;
+	    	margin: 0 20px 0 0;
+	    	right:0;
+	    	top: 0;
+	    }
+    }
+}

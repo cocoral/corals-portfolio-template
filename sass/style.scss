@@ -7,6 +7,8 @@
 * Author URI: http://coralxhe.com
 */
 
+
+@import 'variables';
 @import 'normalize';
 @import 'typography';
 @import 'navigation';
@@ -24,8 +26,9 @@ img {
 }
 
 body {
-	color: #333;
+	color: $almostblack;
 }
+
 
 .container {
 	max-width: 1200px;
@@ -43,9 +46,253 @@ body {
 }
 
 
+/*
+====================================
+cover
+====================================
+*/
+.cover{
+	text-align: center;
+	height:100vh;
+	position: relative;
+	overflow: hidden;
 
+	.cover-content{
+		z-index: 2;
+		img{
+			display: block;
+			width: 80%;
+			max-width: 550px;
+			margin:0 auto;
+		}
+		.cover_intro{
+			padding: 15px;
+			margin:0 auto;
+			width:80%;
+			max-width: 800px;
+		}
+		
+	}
+	.coverOverlay{
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		z-index:-1;
+	}
+	.square{
+		transform:rotate(45deg);
+		display: inline-block;
+		width: 30px;
+		height: 30px;
+		background:$silver;
+		margin: 6.21px;
+		transition: all .5s;
+	}
+	.canary{
+		background:$canary;
+	}
+	.aqua{
+		background:$aqua;
+	}
+	.punch{
+		background:$punch;
+	}
+}
 
+/*
+====================================
+portfolio
+====================================
+*/
+.main-portfolio{
+	position: relative;	
+}
+.portfolio{
+	overflow:hidden;
 
+		.portfolio-words{
+			padding:160px 60px 160px 60px;
+			width:50%;
+			background:rgba(250,249,246,.9);
+			box-shadow: 2px 5px 5px rgba(0,0,0,0.14);
+			h4{
+				margin-bottom: 0;
+			}
+			.portfolio-subtitle{
+				margin-top: 0;
+				font-size: 1.2rem;
+				line-height: 34px;
+				text-transform: uppercase;
+				font-family: 'Avenir Regularv Oblique',sans-serif;
+			}
+			.tags{
+				padding-bottom: 20px;
+				a{
+					background:$punch;
+					padding: 5px;
+					color:$silver;
+				}
+			}
+			.portfolio-url{
+				position: relative;
+				left:2rem;
+			}
+			.portfolio-url::before{
+				content:'';
+				position: absolute;
+			  border-color: $punch;
+			  border-style: solid;
+			  border-width: 0 0 .8rem;
+			  height: 0;
+			  top: .1rem;
+			  left: -1.5rem;
+			  transform: rotate(45deg);
+			  width: .8rem;
 
+			}
 
+		}
+		.portfolioItem{
+			background-size:contain; 
+			background-repeat:no-repeat;
+			background-position:center center;
+		}
+		.portfolio-image{
+			position: absolute;
+			top: 0;
+			z-index: -1;
+		}
 
+	section:first-child{
+		padding-top: 30px;
+	}
+	.portfolioItem:nth-child(2n) > .portfolio-words{
+			float:right;
+		}
+}
+
+/*
+====================================
+aboutme
+====================================
+*/
+.aboutme{
+	@extend .main-portfolio;
+	.aboutMeWrapper{
+		width: 50%;
+		margin:0 auto;
+	}
+	.profileAndIcons{
+		width:50%;
+		float: left;
+		padding-top: 160px;
+		padding-bottom: 160px;
+		.profileImage,
+		.skillset{
+			min-width:200px;
+			margin:0 auto;
+		}
+		.skillset{
+			padding-top: 20px;
+			display: flex;
+			flex-wrap:wrap;
+		}
+		.oneSkill{
+			display: inline-block;
+			text-align: center;
+			width:50px;
+			.iconContainer{
+				width:35.36px;
+				height:35.36px;
+				transform:rotate(45deg);
+				background:$silver;
+				position: relative;
+				padding-bottom:0;
+				display: inline-block;		
+			}
+
+			.skillIconImg{
+				width: 20px;
+			}
+			i,
+			.skillIconImg{
+				font-size: 2rem;
+				transform:rotate(-45deg);
+				display:inline-block;
+				position: absolute;
+				left: 7px;
+				top: 7px;
+			}
+		}
+	}
+	.aboutme-bio{
+		@extend .profileAndIcons;
+		padding-left: 60px;
+	}
+}
+/*
+====================================
+portfolio
+====================================
+*/
+.contact{
+	@extend .main-portfolio;
+	background:$silver;
+	.contactIntro{
+		padding-top: 130px;
+		text-align: center;
+	}
+	.contactWrapper{
+		width: 70%;
+		margin:0 auto;
+	}
+	.contact-emailSocial{
+		padding-left: 30px;
+		width: 50%;
+		float: left;
+		padding-top: 30px;
+
+		.iconContainer{
+			width: 50px;
+			display: inline-block;
+		}
+		.icon45{
+			width:35.36px;
+			height:35.36px;
+			transform:rotate(45deg);
+			background:lightgrey;
+			position: relative;
+			padding-bottom:0;
+			display: inline-block;
+			i{
+				font-size: 2rem;
+				transform:rotate(-45deg);
+				display:inline-block;
+				position: absolute;
+				left: 7px;
+				top: 7px;
+			}		
+		}
+	}
+	.contact-form{
+		@extend .contact-emailSocial;
+		input,
+		textarea{
+			background: $silver;
+			width: 100%;
+			padding:15px;
+			display: block;
+			border:none;
+			border-bottom: 1px solid $grey;
+			transition:all .3s;
+			resize: none;
+
+			&:hover{
+				border-bottom: 1px solid grey;
+			}
+		}
+	}
+
+}

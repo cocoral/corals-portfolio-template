@@ -1,18 +1,26 @@
 <?php get_header(); ?>
 
 	<div id="primary" class="content-area">
-		<div class="cover">
-			
-			<div class='cover-content'>
+
+		<div class="cover">	
+			<div class='cover-content container'>
 				<img src="<?php the_field('logo') ?>" alt="">
-				<h3 class ='cover_intro'><?php echo get_field('coverbio') ?></h3>
+				<?php if ( have_posts() ) while ( have_posts() ) : the_post(); ?>
+
+		        <h3><?php the_content(); ?></h3>
+
+		        <?php endwhile; // end the loop?>
+
 			</div>
 			<div class="coverOverlay">
 				<ul>
 					
 				</ul>
 			</div>
+
 		</div>
+		<!-- end of cover -->
+
 		<main class='main-portfolio' id='main-portfolio'>
 			<h2>PORTFOLIO</h2>
 			<div class="portfolio">
@@ -24,72 +32,82 @@
 			            'order' => 'ASC'
 			            )
 			    ); ?>
-
-
+			
+			
 			    <?php if ( $portfolioQuery->have_posts() ) : ?>
+			
+					        <?php while ($portfolioQuery->have_posts()) : $portfolioQuery->the_post(); ?>
+			
+					                <section id="<?php echo $post->post_name; ?>" class='portfolioItem clearfix' >
+														<div class='portfolio-bg' style='background-image:url(<?php $imgURL = hackeryou_get_thumbnail_url($post);?><?php echo $imgURL ?>); '></div>
 
-		        <?php while ($portfolioQuery->have_posts()) : $portfolioQuery->the_post(); ?>
-
-		                <section id="<?php echo $post->post_name; ?>" class='portfolioItem clearfix' style='background-image:url(<?php $imgURL = hackeryou_get_thumbnail_url($post);?><?php echo $imgURL ?>); '>
-
-		                	<div class='portfolio-words'>
-		                	<h4><?php the_title(); ?></h4>
-		                		<p class='portfolio-subtitle'><?php the_field('subtitle'); ?></p>
-		                		<p><?php the_content(); ?></p>
-		                		<p class='tags small'><?php the_tags('', ' ', ''); ?></p>
-		                		<a target='_blank' class='portfolio-url' href="<?php echo the_field('url') ?> ">View Me Live</a>
-		                	</div>
-		                </section>
-
-
-		        <?php endwhile; ?>
-
-		        <?php wp_reset_postdata(); ?>
-
-
-		    <?php else:  ?>
-		        <p>Hey, your portfolio is empty.</p>
-		    <?php endif; ?>
+					                	<div class='portfolio-words'>
+					                		<h4><?php the_title(); ?></h4>
+					                		<p class='portfolio-subtitle'><?php the_field('subtitle'); ?></p>
+					                		<div class='portfolio-image'>
+					                			<img src="<?php $imgURL = hackeryou_get_thumbnail_url($post);?><?php echo $imgURL ?>" alt="portfolioImage">
+					                		</div>
+					                		<p><?php the_content(); ?></p>
+					                		<p class='tags small'><?php the_tags('', ' ', ''); ?></p>
+					                		<a target='_blank' class='portfolio-url' href="<?php echo the_field('url') ?> "><i class="fa fa-stop"></i>View Me Live</a>
+					                	</div>
+					                	
+					                </section>
+			
+			
+					        <?php endwhile; ?>
+			
+					        <?php wp_reset_postdata(); ?>
+			
+			
+				<?php else:  ?>
+					<p>Hey, your portfolio is empty.</p>
+				<?php endif; ?>
 			</div>
+		
 		</main>
+		<!-- end of portfolio -->
 
 		<div class="aboutme" id='aboutme'>
-			<div class='aboutMeWrapper clearfix'>
-				<h2>ABOUT ME</h2>
-				<div class="profileAndIcons">
-					<?php $image = get_field('profile_picture'); $imageUrl = $image['sizes']['medium_large'] ?>
-					<img class='profileImag' src="<?php echo $imageUrl ?> " alt="">
-					<div class="skillset">
-						<?php while(has_sub_field('skillset')) : ?>
-							<div class='oneSkill'>
-								<div class='iconContainer'>
-									<i class='<?php the_sub_field('skill_icon') ?>'></i>
+			<div class='aboutMeWrapper '>
+				<h2>ABOUT</h2>
+				<div class='aboutMeContent clearfix'>
+					<div class="profileAndIcons">
+						<?php $image = get_field('profile_picture'); $imageUrl = $image['sizes']['medium_large'] ?>
+						<img class='profileImage' src="<?php echo $imageUrl ?> " alt="">
+						<div class="skillset">
+							<?php while(has_sub_field('skillset')) : ?>
+								<div class='oneSkill'>
+									<div class='iconContainer'>
+										<i class='<?php the_sub_field('skill_icon') ?>'></i>
+									</div>
+									<p><?php the_sub_field('skill_name') ?></p>
 								</div>
-								<p><?php the_sub_field('skill_name') ?></p>
+							<?php endwhile ?>
+							<div class="oneSkill">
+								<div class="iconContainer">
+										<img class='skillIconImg' src="<?php bloginfo('template_directory')?>/images/indesign.png" alt="indesign">
+								</div>
+									<p>Indesign</p>
 							</div>
-						<?php endwhile ?>
-						<div class="oneSkill">
-							<div class="iconContainer">
-									<img class='skillIconImg' src="<?php bloginfo('template_directory')?>/images/indesign.png" alt="indesign">
+					
+							<div class="oneSkill">
+								<div class="iconContainer">
+					
+										<img class='skillIconImg' src="<?php bloginfo('template_directory')?>/images/sketch.png" alt="sketch">
+								</div>
+									<p>Sketch</p>
 							</div>
-								<p>Indesign</p>
-						</div>
-
-						<div class="oneSkill">
-							<div class="iconContainer">
-
-									<img class='skillIconImg' src="<?php bloginfo('template_directory')?>/images/sketch.png" alt="sketch">
-							</div>
-								<p>Sketch</p>
 						</div>
 					</div>
-				</div>
-			
-				<div class='aboutme-bio'>
-					<p><?php echo get_field('profile_biography') ?></p>
+								
+					<div class='aboutme-bio'>
+						<h5><?php echo get_field('profile_biography') ?></h5>
+					</div>
 				</div>
 			</div>
-		</div>
+		</div> 
+		<!-- end of about -->
 
 		<div class="contact" id='contact'>
 			<h2>CONTACT</h2>
@@ -122,6 +140,7 @@
 				</div>
 			</div>
 		</div>
+		<!-- end of contact -->
 
 	
 	</div><!-- #primary -->

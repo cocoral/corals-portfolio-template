@@ -11,13 +11,28 @@ h2,h4{
 	font-family: $righteous;
 }
 h2{
-	opacity: 0.5;
+	opacity: 0.8;
 	font-size: 4.8rem;
 	position: absolute;
 	z-index: 2;
 	left: 50%;
     transform: translateX(-50%);
-    letter-spacing: 2px;	
+    letter-spacing: 2px;
+    &::before{
+    	content:'';
+			  position: absolute;
+			  border-color: $punch;
+			  border-style: solid;
+			  border-width: 0 0 15rem;
+			  height: 0;
+			  top: calc(-7.5rem - 40px);
+			  left: -1.5rem;
+			  width: 15rem;
+			  z-index:-1;
+			  left: 50%;
+			  transform: translateX(-50%) rotate(45deg) ;
+    }
+
 }
 h3{
 	font-size: 2rem;
@@ -29,6 +44,12 @@ h4{
 
 p{
 	line-height: 18px;
+}
+h5{
+	font-size: 1.6rem;
+	font-weight: 200;
+	line-height: 22px;
+
 }
 
 .small{

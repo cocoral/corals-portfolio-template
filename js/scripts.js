@@ -1,42 +1,7 @@
 var apps = {};
 
-apps.makeBg = function(){
-	console.log("tea")
-    for(var i = 0; i < 500; i++) {
-    	var className = 'square'+ i;
-	    var square = '<li class= "square ' + className + '"><p class="overlay"></p></li>';
-	    $('.coverOverlay ul').append(square);
-    }
-    apps.selectRandomSquare();
-	
-}
-apps.selectRandomSquare = function(){
-	console.log('something')
-	    //make an array with 10 random number for targeting 10 random grid.
-    //targeting 10 random grid and give them a overlay with color.
-    //1 seconds later take away that color
-    var randomNum = [];
 
-    $('.square').on('click',function(){
-
-    		console.log('r')
-    		$(this).addClass('canary').delay(1000).queue(function(){
-	    		$(this).removeClass('canary').dequeue();
-    		});
-    	
-    });
-    // for (var i = 0; i < 10; i++){
-    // 	var aRandomNum = Math.floor(Math.random()*500);
-    // 	randomNum.push(aRandomNum);
-
-    // 	var targetSquare = 'square' + aRandomNum;
-    // 	$('.'+targetSquare).addClass('canary',500,function(){
-    // 		$(this).removeClass('canery',500);
-    // 	});
-    // 	// console.log(targetSquare);
-    // }
-}
-
+//This is the smoothScroll
 apps.smoothScroll = function(){
 	$('a[href*=#]:not([href=#])').click(function() {
     if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') 
@@ -47,13 +12,46 @@ apps.smoothScroll = function(){
            if (target.length) {
              $('html,body').animate({
                  scrollTop: target.offset().top
-            }, 1000);
-            return false;
+             }, 1000);
+             return false;
+            }   
         }
-    }
-});
+    });
+}
+
+//creat 20 diamonds
+//for each diamond
+//give it a random position
+//<li class='square' style='position:absolute;left:X;top:Y;><p class="overlay"></p></li>'
+//attach it in the coverOverlay
+
+apps.placeDiamond = function(){
+    console.log("tea");
+    var aDiamond;
+    for(var i = 0; i < 15; i++) {
+        if(i<3){
+            aDiamond = apps.bakeDiamond('first');
+        }else if(i<6){
+            aDiamond = apps.bakeDiamond('second');
+        }else if(i<9){
+            aDiamond = apps.bakeDiamond('third');
+        }else if(i<12){
+            aDiamond = apps.bakeDiamond('forth');  
+        }else{
+            aDiamond = apps.bakeDiamond('fifth');
+        };      
+        $('.coverOverlay ul').append(aDiamond);  
+    };      
+}
+
+apps.bakeDiamond = function(timing){
+    var aRandomX = Math.floor(Math.random()*screen.width);
+    var aRandomY = Math.floor(Math.random()*screen.height);
+    var diamondString = "<li class='square " + timing + "' style='position:absolute;left:" + aRandomX + "px;top:" + aRandomY +"px;><p class='overlay'></p></li>";
+    return diamondString;
 }
 
 $(function(){
 	apps.smoothScroll();
+    apps.placeDiamond();
 })

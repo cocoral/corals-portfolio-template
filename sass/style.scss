@@ -52,53 +52,68 @@ cover
 ====================================
 */
 .cover{
+	@extend .posr,.overh;
+
 	text-align: center;
 	height:100vh;
-	position: relative;
-	overflow: hidden;
 
 	.cover-content{
+		@extend .posr;
+		top:50%;
+		transform: translateY(-55%);
 		z-index: 2;
+
+		h3{
+			padding-top: 10px;
+			width:80%;
+			max-width: 800px;
+			margin:0 auto;
+			p{
+				line-height: 3rem;
+			}
+		}
 		img{
 			display: block;
-			width: 80%;
+			width: 50%;
 			max-width: 550px;
 			margin:0 auto;
 		}
-		.cover_intro{
-			padding: 15px;
-			margin:0 auto;
-			width:80%;
-			max-width: 800px;
-		}
-		
 	}
 	.coverOverlay{
-		position: absolute;
+		z-index: -1;
+		position:fixed;
+		@extend .posa;
 		top: 0;
+		bottom: 0;
 		left: 0;
 		right: 0;
-		bottom: 0;
-		z-index:-1;
 	}
 	.square{
 		transform:rotate(45deg);
 		display: inline-block;
 		width: 30px;
 		height: 30px;
-		background:$silver;
 		margin: 6.21px;
 		transition: all .5s;
 	}
-	.canary{
-		background:$canary;
+	.first{
+		@include firstAnimation(lighten($canary,20%),lighten($aqua,20%),4s,0);
+
 	}
-	.aqua{
-		background:$aqua;
+	.second{
+		@include secondAnimation(lighten($grey,10%),lighten($punch,30%),3.5s,0.5s);
 	}
-	.punch{
-		background:$punch;
+	.third{
+		@include thirdAnimation(lighten($aqua,20%),$silver,3s,2s);		
 	}
+	.forth{
+		@include forthAnimation(lighten($punch,30%),$grey,4s,2.5s);		
+	}
+	.fifth{
+		@include fifthAnimation(lighten($aqua,20%),ligten($canary,20%),4s,1.5s);	
+
+	}
+
 }
 
 /*
@@ -107,18 +122,27 @@ portfolio
 ====================================
 */
 .main-portfolio{
-	position: relative;	
+	@extend .posr,.overh;
+	h2{
+		z-index:3;
+	}
+
 }
 .portfolio{
 	overflow:hidden;
 
 		.portfolio-words{
+			@extend .posr;
+			z-index:2;
 			padding:160px 60px 160px 60px;
 			width:50%;
 			background:rgba(250,249,246,.9);
 			box-shadow: 2px 5px 5px rgba(0,0,0,0.14);
 			h4{
 				margin-bottom: 0;
+			}
+			h4,p,a{
+				max-width: 400px;
 			}
 			.portfolio-subtitle{
 				margin-top: 0;
@@ -130,46 +154,64 @@ portfolio
 			.tags{
 				padding-bottom: 20px;
 				a{
-					background:$punch;
+					display: inline-block;
+					background:lightgrey;
 					padding: 5px;
-					color:$silver;
+					border-radius: 3px;
+					margin-right: 5px;
+					margin-bottom: 5px;
 				}
 			}
-			.portfolio-url{
-				position: relative;
-				left:2rem;
-			}
-			.portfolio-url::before{
-				content:'';
-				position: absolute;
-			  border-color: $punch;
-			  border-style: solid;
-			  border-width: 0 0 .8rem;
-			  height: 0;
-			  top: .1rem;
-			  left: -1.5rem;
+			.fa-stop{
+				@extend .posr;
+				top: 4px;
 			  transform: rotate(45deg);
-			  width: .8rem;
-
+				padding-right: 10px;
 			}
+			// .portfolio-url{
+			// 	position: relative;
+			// 	left:2rem;
+			// }
+			// .portfolio-url::before{
+			// 	content:'';
+			// 	position: absolute;
+			//   border-color: $punch;
+			//   border-style: solid;
+			//   border-width: 0 0 .8rem;
+			//   height: 0;
+			//   top: .1rem;
+			//   left: -1.5rem;
+			//   transform: rotate(45deg);
+			//   width: .8rem;
+
+			// }
 
 		}
 		.portfolioItem{
-			background-size:contain; 
-			background-repeat:no-repeat;
-			background-position:center center;
+			@extend .posr;
+			background:white;
+
+		}
+		.portfolio-bg{
+			@extend .posa;
+			z-index:0;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			background-size: contain;
+			background-position: center center;
+			background-repeat: no-repeat;
+
 		}
 		.portfolio-image{
-			position: absolute;
-			top: 0;
-			z-index: -1;
+			display: none;
 		}
-
-	section:first-child{
-		padding-top: 30px;
-	}
-	.portfolioItem:nth-child(2n) > .portfolio-words{
+		.portfolioItem:nth-child(2n) > .portfolio-words{
 			float:right;
+		}
+		.portfolioItem:nth-child(2n-1) > .portfolio-words{
+		text-align: right;
 		}
 }
 
@@ -179,9 +221,9 @@ aboutme
 ====================================
 */
 .aboutme{
-	@extend .main-portfolio;
+	@extend .posr,.overh;
 	.aboutMeWrapper{
-		width: 50%;
+		width: 60%;
 		margin:0 auto;
 	}
 	.profileAndIcons{
@@ -191,6 +233,9 @@ aboutme
 		padding-bottom: 160px;
 		.profileImage,
 		.skillset{
+			width:100%;
+			display: block;
+			max-width: 300px;
 			min-width:200px;
 			margin:0 auto;
 		}
@@ -198,6 +243,7 @@ aboutme
 			padding-top: 20px;
 			display: flex;
 			flex-wrap:wrap;
+			justify-content:space-around;
 		}
 		.oneSkill{
 			display: inline-block;
@@ -228,28 +274,35 @@ aboutme
 		}
 	}
 	.aboutme-bio{
-		@extend .profileAndIcons;
+		width:50%;
+		float: left;
+		padding-top: 160px;
+		padding-bottom: 160px;
 		padding-left: 60px;
 	}
 }
+
+
+
 /*
 ====================================
-portfolio
+Contact
 ====================================
 */
 .contact{
-	@extend .main-portfolio;
+	@extend .posr,.overh;
 	background:$silver;
 	.contactIntro{
-		padding-top: 130px;
+		padding-top: 100px;
 		text-align: center;
 	}
 	.contactWrapper{
 		width: 70%;
 		margin:0 auto;
+		padding-bottom: 60px;
 	}
 	.contact-emailSocial{
-		padding-left: 30px;
+		padding-left: 60px;
 		width: 50%;
 		float: left;
 		padding-top: 30px;
@@ -293,6 +346,125 @@ portfolio
 				border-bottom: 1px solid grey;
 			}
 		}
+		input[type='submit']{
+			width:auto;
+			&:hover{
+				color:$canary;
+			}
+		}
 	}
 
 }
+
+/*
+====================================
+Media Query
+====================================
+*/
+
+@media (max-width: 850px) {
+	.cover{
+		.cover-content{
+			img{
+				width: 60%;
+			}
+		}
+	}
+	.aboutme{
+	    .aboutMeWrapper{
+			width:80%;
+		}
+  	}
+  	.contact{
+  		.contactWrapper{
+  			width:80%;
+  		}
+  	}
+}
+
+@media (max-width:700px) {
+	.cover{
+		.cover-content{
+			img{
+				width: 70%;
+			}
+		}
+	}
+	.aboutme{
+		.aboutMeContent{
+			display: flex;
+			flex-direction:column;
+			.profileAndIcons,
+			.aboutme-bio{
+				float: none;
+			}
+			.profileAndIcons{
+				width: 90%;
+				order:2;
+				padding-top: 60px;
+				.skillset{
+					max-width: 450px;
+				}
+			}
+			.aboutme-bio{
+				width: 90%;
+				order:1;
+				padding-bottom: 0;
+				padding-left: 30px;
+			}
+		}
+	}
+	.contact{
+
+		.contact-emailSocial{
+			float: none;
+			width: 80%;
+		}
+		.contact-form,.contact-emailSocial{
+			width: 100%;
+			padding-left: 0;
+		}
+	
+	}
+}
+
+@media (max-width:550px) {
+
+	.cover{
+		.cover-content{
+			img{
+				width: 80%;
+			}
+		}
+	}
+	.main-portfolio{
+		.portfolio-words{
+			float: none;
+			width: 100%;
+			padding-bottom: 60px;
+			padding-top:60px;
+		}
+		.portfolio-bg{
+			display: none;
+		}
+		.portfolio-image{
+			display: block;
+		}
+		.portfolioItem:nth-child(2n-1) > .portfolio-words{
+		text-align: left;
+		}
+		.portfolioItem:first-child .portfolio-words{
+			padding-top: 140px;
+			.portfolio-subtitle{
+				margin-bottom: 0;
+			}
+
+		}
+		.portfolioItem:last-child .portfolio-words{
+			padding-bottom: 100px;
+		}
+	}
+
+}
+
+

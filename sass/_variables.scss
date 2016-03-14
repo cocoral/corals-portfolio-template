@@ -13,16 +13,84 @@ $canary:#F9B81F;
 $grey:#E7E4DF;
 $silver:#F8F7F4;
 
-//fonts
-$righteous:'Righteous', cursive;
-$avenir:'Avenir Light',sans-serif;
 
+//extend
 .posr{
 	position: relative;
 }
 .posa{
 	position: absolute;
 }
+.overh{
+	overflow: hidden;
+}
+
+//mixins
+@mixin firstAnimation($first,$second,$duration,$delay){
+	@keyframes diamondShine {
+	0%   {opacity: 1;background:$first;}
+	25%  {opacity: 0;}
+    50%  {opacity: 1;background:$second;}
+    75%  {opacity: 0;}
+    100% {opacity: 1;background:$first;}
+	}
+	animation: diamondShine $duration infinite;
+	animation-delay: $delay;
+}
+
+@mixin secondAnimation($first,$second,$duration,$delay){
+	@keyframes diamondShineAgain {
+	0%   {opacity: 1;background:$first;}
+	25%  {opacity: 0;}
+    50%  {opacity: 1;background:$second;}
+    75%  {opacity: 0;}
+    100% {opacity: 1;background:$first;}
+	}
+	animation: diamondShineAgain $duration infinite;
+	animation-delay: $delay;
+}
+
+@mixin thirdAnimation($first,$second,$duration,$delay){
+	@keyframes diamondShineAgainYo {
+	0%   {opacity: 1;background:$first;}
+	25%  {opacity: 0;}
+    50%  {opacity: 1;background:$second;}
+    75%  {opacity: 0;}
+    100% {opacity: 1;background:$first;}
+	}
+	animation: diamondShineAgainYo $duration infinite;
+	animation-delay: $delay;
+}
+
+@mixin forthAnimation($first,$second,$duration,$delay){
+	@keyframes diamondShineAgainYoyo {
+	0%   {opacity: 1;background:$first;}
+	25%  {opacity: 0;}
+    50%  {opacity: 1;background:$second;}
+    75%  {opacity: 0;}
+    100% {opacity: 1;background:$first;}
+	}
+	animation: diamondShineAgainYoyo $duration infinite;
+	animation-delay: $delay;
+}
+
+@mixin fifthAnimation($first,$second,$duration,$delay){
+	@keyframes diamondShineAgainYoyoyo {
+	0%   {opacity: 1;background:$first;}
+	25%  {opacity: 0;}
+    50%  {opacity: 1;background:$second;}
+    75%  {opacity: 0;}
+    100% {opacity: 1;background:$first;}
+	}
+	animation: diamondShineAgainYoyoyo $duration infinite;
+	animation-delay: $delay;
+}
+
+
+//fonts
+$righteous:'Righteous', cursive;
+$avenir:'Avenir Light',sans-serif;
+
 
 @font-face {
 font-family: 'Avenir Light';
